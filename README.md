@@ -1,37 +1,5 @@
 # LR Module Sampler — Dual Channel Sampler (VST3 + Standalone)
 
-Modul trigger drum pad 2 kanal berbasis **JUCE 8**. Input 1/2 (L/R) mendeteksi pukulan,
-lalu memainkan sampling one-shot ke Output 1/2 (L/R).
-
-## Build
-
-Butuh CMake ≥ 3.22 dan compiler C++17. JUCE diunduh otomatis (FetchContent).
-
-```bash
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release --parallel
-```
-Hasil: `build/SampleCore_artefacts/Release/` — `VST3/LR Module Sampler.vst3` dan `Standalone/LR Module Sampler.exe` (di macOS/Linux sesuai platform). Ikon aplikasi dari logo LR (`assets/icon/`).
-
-Linux butuh: `libasound2-dev libfreetype-dev libfontconfig1-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev libxrandr-dev libxrender-dev libgl1-mesa-dev`.
-
-**GitHub Actions** (`.github/workflows/build.yml`) otomatis build Windows/macOS/Linux setiap push;
-file plugin ada di tab *Actions → Artifacts*.
-
-> Versi Standalone: aktifkan input audio di *Options → Audio/MIDI Settings* dan matikan *Mute audio input*.
-
-## Struktur
-```
-CMakeLists.txt
-assets/            semua PNG GUI (masuk BinaryData otomatis)
-Source/
-  PluginProcessor  trigger, filter, sampler, preset, state
-  PluginEditor     layout GUI sesuai mockup
-  LcdDisplay.h     LCD: preset, meter, FFT + node HPF/LPF
-  UiKit.h          LookAndFeel filmstrip knob/fader, tombol 3-state, knop preset
-  Dsp.h            biquad HPF/LPF (24 dB/oct)
-```
-
 ## Cara pakai
 | Kontrol | Fungsi |
 |---|---|
